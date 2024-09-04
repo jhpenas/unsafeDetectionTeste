@@ -23,9 +23,9 @@ WEIGHTS_PATH = 'GroundingDINO/weights/groundingdino_swint_ogc.pth'
 
 model = load_model(CONFIG_PATH,WEIGHTS_PATH)
 
-VIDEO_PATH = 'videos/forklift1.mp4'
+VIDEO_PATH = 'videos/boi.mp4'
 
-TEXT_PROMPT = 'person without hardhat, person near forklift'
+TEXT_PROMPT = 'person with knife and without gloves'
 BOX_THRESHOLD = 0.35
 TEXT_THRESHOLD = 0.15
 
@@ -36,6 +36,7 @@ cap = cv2.VideoCapture(VIDEO_PATH)
 #Get Frame and Height
 frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+output_video_path = "/videos/outputvideo1.mp4"
 
 #Define the codec and create VideoWriter object
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
@@ -67,6 +68,9 @@ while cap.isOpened():
 
     # Display the annotated frame
     cv2.imshow("GroundingDINO Tracking", annotated_frame)
+
+    # Write the annotated frame to the output video
+    out.write(annotated_frame)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break

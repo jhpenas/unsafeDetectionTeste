@@ -2,8 +2,8 @@ from ultralytics import YOLO
 import cv2
 
 # Initialize a YOLO-World model
-model = YOLO("yolov8s-world.pt")  # or select yolov8m/l-world.pt for different sizes
-model.set_classes(["person near a vehicle","person without hat"])
+model = YOLO("yolov8x-worldv2.pt")  # or select yolov8m/l-world.pt for different sizes
+model.set_classes(['person','forklift'])
 
 # Open the video file
 video_path = "videos/forklift1.mp4"
@@ -22,7 +22,7 @@ while cap.isOpened():
         annotated_frame = results[0].plot()
 
         # Display the annotated frame
-        cv2.imshow("YOLOv8 Tracking", annotated_frame)
+        cv2.imshow("Unsafe Detection", annotated_frame)
 
         # Break the loop if 'q' is pressed
         if cv2.waitKey(1) & 0xFF == ord("q"):
